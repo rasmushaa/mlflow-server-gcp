@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
     
 # mysqlclient is the most reliable MySQL driver for MLflow (via SQLAlchemy).
-RUN pip install mlflow mysqlclient google-cloud-storage 
+RUN pip install mlflow==3.6.0 mysqlclient==2.2.7 google-cloud-storage==3.5.0
 
 ENV PORT=8080
 EXPOSE 8080
