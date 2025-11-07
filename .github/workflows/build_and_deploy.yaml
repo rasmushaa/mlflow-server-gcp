@@ -36,7 +36,7 @@ jobs:
     - name: Deploy to Cloud Run
       run: |
         DB_CONN_NAME="${{ secrets.GCP_PROJECT_ID }}:${{ secrets.GCP_LOCATION}}:${{ secrets.GCP_DB }}" # Found on the existing GCP Cloud SQL MySQL databse
-        BACKEND_STORE_URI="mysql://${{ secrets.GCP_DB_USER }}:${{ secrets.GCP_DB_TOKEN }}@/mlflow?unix_socket=/cloudsql/${{ secrets.GCP_DB }}" # User is created on the Cloud SQL page
+        BACKEND_STORE_URI="mysql+pymysql://${{ secrets.GCP_DB_USER }}:${{ secrets.GCP_DB_TOKEN }}@/mlflow?unix_socket=/cloudsql/${DB_CONN_NAME}" # User is created on the Cloud SQL page
         ARTIFACT_ROOT="gs://${{ secrets.GCP_BUCKET }}" # Container SA must have read/wrtie access to the bucket
         gcloud run deploy mlflow-server  \
           --image "${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mlflow-images/mlflow-server:latest" \
