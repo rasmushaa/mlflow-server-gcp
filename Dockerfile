@@ -2,6 +2,7 @@ FROM python:3.13-slim
 
 WORKDIR /
 
+COPY nginx.conf /etc/nginx/nginx.conf
 COPY requirements.txt requirements.txt 
 COPY server.sh server.sh
 
