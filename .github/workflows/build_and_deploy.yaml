@@ -48,6 +48,6 @@ jobs:
           --cpu 1 \
           --max-instances 1 \
           --allow-unauthenticated \
-          --set-env-vars BACKEND_STORE_URI="$BACKEND_STORE_URI",ARTIFACT_ROOT="$ARTIFACT_ROOT",MLFLOW_ALLOW_INSECURE_HOSTS="*" \
+          --set-env-vars BACKEND_STORE_URI="$BACKEND_STORE_URI",ARTIFACT_ROOT="$ARTIFACT_ROOT",MLFLOW_ALLOW_INSECURE_HOSTS="mlflow-server-${{ secrets.GCP_CLOUD_RUN_ID }}.${{ secrets.GCP_LOCATION}}.run.app" \
           --add-cloudsql-instances "$DB_CONN_NAME" \
           --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }}
