@@ -16,6 +16,10 @@ RUN htpasswd -bc /etc/nginx/.htpasswd mlflowuser mypassword
 EXPOSE 8080
 
 # Start both Nginx and MLflow
-CMD service nginx start && mlflow server --host 127.0.0.1 --port 5000 \
+## Start MLflow and Nginx. Run MLflow bound to 0.0.0.0 so nginx (and other processes)
+## in the container can reliably reach it. Start nginx in the foreground so it
+## becomes PID 1 and keeps the container alive.
+CMD mlflow server --host 0.0.0.0 --port 5000 \
     --backend-store-uri sqlite:///mlflow.db \
-    --default-artifact-root ./artifacts
+    --default-artifact-root ./artifacts & \
+    nginx -g "daemon off;"
