@@ -12,8 +12,8 @@ printf "%s:$(openssl passwd -apr1 %s)\n" "$MLFLOW_TRACKING_USERNAME" "$MLFLOW_TR
 # Start MLflow server in background
 mlflow db upgrade $BACKEND_STORE_URI
 mlflow server \
-  --host 0.0.0.0 \
-  --port 8080 \
+  --host 127.0.0.1 \
+  --port 5000 \
   --backend-store-uri $BACKEND_STORE_URI \
   --artifacts-destination $ARTIFACT_ROOT
 
