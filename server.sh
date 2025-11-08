@@ -19,6 +19,3 @@ mlflow server \
     --port 5000 \
     --backend-store-uri $MLFLOW_BACKEND_STORE_URI \
     --default-artifact-root $MLFLOW_ARTIFACT_URI &
-
-# start Nginx in foreground (Cloud Run expects PID 1 to keep running)
-nginx -g "daemon off;"
