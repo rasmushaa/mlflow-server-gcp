@@ -37,12 +37,11 @@ jobs:
       run: |
         DB_CONN_NAME="${{ secrets.GCP_PROJECT_ID }}:${{ secrets.GCP_LOCATION}}:${{ secrets.GCP_DB }}"
         cat <<EOF > env-vars.yaml
-        env-vars:
-          BACKEND_STORE_URI: "postgresql+psycopg2://${{ secrets.GCP_DB_USER }}:${{ secrets.GCP_DB_TOKEN }}@/mlflow?host=/cloudsql/${DB_CONN_NAME}"
-          ARTIFACT_ROOT: "gs://${{ secrets.GCP_BUCKET }}"
-          MLFLOW_SERVER_ALLOWED_HOSTS: "${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }}"
-          MLFLOW_TRACKING_USERNAME: "${{ secrets.MLFLOW_TRACKING_USERNAME }}" 
-          MLFLOW_TRACKING_PASSWORD: "${{ secrets.MLFLOW_TRACKING_PASSWORD }}"
+        BACKEND_STORE_URI: "postgresql+psycopg2://${{ secrets.GCP_DB_USER }}:${{ secrets.GCP_DB_TOKEN }}@/mlflow?host=/cloudsql/${DB_CONN_NAME}"
+        ARTIFACT_ROOT: "gs://${{ secrets.GCP_BUCKET }}"
+        MLFLOW_SERVER_ALLOWED_HOSTS: "${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }}"
+        MLFLOW_TRACKING_USERNAME: "${{ secrets.MLFLOW_TRACKING_USERNAME }}" 
+        MLFLOW_TRACKING_PASSWORD: "${{ secrets.MLFLOW_TRACKING_PASSWORD }}"
         EOF
 
     - name: Deploy to Cloud Run
