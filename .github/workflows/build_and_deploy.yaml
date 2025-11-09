@@ -59,4 +59,4 @@ jobs:
           --allow-unauthenticated \
           --add-cloudsql-instances "$DB_CONN_NAME" \
           --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }} \
-          --set-env-vars-file env-vars.yaml
+          --env-vars-file env-vars.yaml
