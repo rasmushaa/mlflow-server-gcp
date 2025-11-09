@@ -38,6 +38,9 @@ jobs:
         DB_CONN_NAME="${{ secrets.GCP_PROJECT_ID }}:${{ secrets.GCP_LOCATION}}:${{ secrets.GCP_DB }}"
         BACKEND_STORE_URI="postgresql+psycopg2://${{ secrets.GCP_DB_USER }}:${{ secrets.GCP_DB_TOKEN }}@/mlflow?host=/cloudsql/${DB_CONN_NAME}"
         ARTIFACT_ROOT="gs://${{ secrets.GCP_BUCKET }}"
+        MLFLOW_SERVER_ALLOWED_HOSTS="${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }}"
+        MLFLOW_TRACKING_PASSWORD="${{ secrets.MLFLOW_TRACKING_PASSWORD }}"
+        MLFLOW_TRACKING_USERNAME="${{ secrets.MLFLOW_TRACKING_USERNAME }}" 
         
         gcloud run deploy mlflow-server \
           --image "${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mlflow-images/mlflow-server:latest" \
@@ -50,8 +53,8 @@ jobs:
           --allow-unauthenticated \
           --add-cloudsql-instances "$DB_CONN_NAME" \
           --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }} \
-          --set-env-vars "BACKEND_STORE_URI=$BACKEND_STORE_URI" \
-          --set-env-vars "ARTIFACT_ROOT=$ARTIFACT_ROOT" \
-          --set-env-vars "MLFLOW_SERVER_ALLOWED_HOSTS=${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }}" \
-          --set-env-vars "MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }}" \
-          --set-env-vars "MLFLOW_TRACKING_USERNAME=${{ secrets.MLFLOW_TRACKING_USERNAME }}" 
+          --set-env-vars BACKEND_STORE_URI="$BACKEND_STORE_URI" \
+          --set-env-vars ARTIFACT_ROOT="$ARTIFACT_ROOT" \
+          --set-env-vars MLFLOW_SERVER_ALLOWED_HOSTS="$MLFLOW_SERVER_ALLOWED_HOSTS" \
+          --set-env-vars MLFLOW_TRACKING_PASSWORD="$MLFLOW_TRACKING_PASSWORD" \
+          --set-env-vars MLFLOW_TRACKING_USERNAME="$MLFLOW_TRACKING_USERNAME" 
