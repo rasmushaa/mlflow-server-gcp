@@ -1,0 +1,3 @@
+## Test
+
+![Label](architecture.drawio)

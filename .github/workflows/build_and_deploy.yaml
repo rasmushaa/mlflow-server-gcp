@@ -23,15 +23,15 @@ jobs:
       with:
         project_id: ${{ secrets.GCP_PROJECT_ID }}
 
-    #- name: Configure Docker to use gcloud as a credential helper
-    #  run: |
-    #    gcloud auth configure-docker ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
+    - name: Configure Docker to use gcloud as a credential helper
+      run: |
+        gcloud auth configure-docker ${{ secrets.GCP_LOCATION }}-docker.pkg.dev
 
-    #- name: Build and Push Docker image
-    #  run: |
-    #    IMAGE_URI="${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mlflow-images/mlflow-server:latest"
-    #    docker build -t "$IMAGE_URI" .
-    #    docker push "$IMAGE_URI"
+    - name: Build and Push Docker image
+      run: |
+        IMAGE_URI="${{ secrets.GCP_LOCATION }}-docker.pkg.dev/${{ secrets.GCP_PROJECT_ID }}/mlflow-images/mlflow-server:latest"
+        docker build -t "$IMAGE_URI" .
+        docker push "$IMAGE_URI"
 
     - name: Create env-vars.yaml
       run: |
