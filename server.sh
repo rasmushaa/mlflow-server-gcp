@@ -18,7 +18,7 @@ echo "Starting MLflow server (host=127.0.0.1 port=5000)"
 mlflow server \
     --host 127.0.0.1 \
     --port 5000 \
-    --backend-store-uri "$BACKEND_STORE_URI:" \
+    --backend-store-uri "$BACKEND_STORE_URI" \
     --default-artifact-root "$ARTIFACT_ROOT" \
     --serve-artifacts &
 
