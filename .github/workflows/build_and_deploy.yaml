@@ -48,6 +48,10 @@ jobs:
           --cpu 1 \
           --max-instances 1 \
           --allow-unauthenticated \
-          --set-env-vars BACKEND_STORE_URI="$BACKEND_STORE_URI",ARTIFACT_ROOT="$ARTIFACT_ROOT",MLFLOW_SERVER_ALLOWED_HOSTS="${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }},MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }},MLFLOW_TRACKING_USERNAME=${{ secrets.MLFLOW_TRACKING_USERNAME }}" \
           --add-cloudsql-instances "$DB_CONN_NAME" \
-          --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }}
+          --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }} \
+          --set-env-vars BACKEND_STORE_URI="$BACKEND_STORE_URI" \
+          --set-env-vars ARTIFACT_ROOT="$ARTIFACT_ROOT" \
+          --set-env-vars MLFLOW_SERVER_ALLOWED_HOSTS=${{ secrets.MLFLOW_SERVER_ALLOWED_HOSTS }} \
+          --set-env-vars MLFLOW_TRACKING_PASSWORD=${{ secrets.MLFLOW_TRACKING_PASSWORD }} \
+          --set-env-vars MLFLOW_TRACKING_USERNAME=${{ secrets.MLFLOW_TRACKING_USERNAME }} 
