@@ -139,6 +139,7 @@ If the bucket is in a US region, GCS has a free storage tier—so you mainly pay
 ## 4.4 Cloud SQL (PostgreSQL)
 Create a Cloud SQL instance with PostgreSQL. Tips:
 - You can use the smallest shared-core instance (“the potato CPU”), which is enough for MLflow.
+- Turn off any automatic backups.
 - You only pay for allocated storage (≈ $0.05/day for 10 GB) plus network egress.
 - You may turn the instance off when not using it, but note:
     - Storage charges still apply
