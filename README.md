@@ -1,5 +1,158 @@
-## Test
+# MLflow Tracking Server on Google Cloud
 
-![Label](architecture.drawio)
+[![Docs](https://img.shields.io/badge/Architecture-Drawio-red.svg)](https://raw.githubusercontent.com/rasmushaa/mlflow-server-gcp/refs/heads/main/doc/arc.drawio)
 
-[Test](https://viewer.diagrams.net/?tags=%7B%7D&lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=architecture.drawio&dark=auto#R%3Cmxfile%3E%3Cdiagram%20id%3D%227KIHbQtCo1yBMyklbY-j%22%20name%3D%22Page-1%22%3ErVbLlqo4FP0ah30XJFilQwVFaplYKpalk14IEcIrLB7y%2BPqbaLCsx%2B1Bd%2BuAZJ%2FDOTvbw8YB1JPGzJ0sQMwj8QAoXjOAxgAAVVXH%2FCKQ9oY8Q%2FUG%2BDn1ZNIHsKUdkaAi0Yp6pPiUWDIWlzT7DLosTYlbfsKcPGf157Qziz93zRyffAO2rhN%2FR%2FfUK4MbOgLPH%2FiCUD%2FoO6tP8sCJ0yfLkxSB47H6AYKzAdRzxsrbKml0Egvxel1u983%2FEL0Ty0la%2FnDDriD56hQKTYASOyf%2Bu1yT9JhV3gA8DQDkGsPppkpvlWKaRrcUzymdAZxcpQFz3hDowaZJgudyHF5COoLDxNL0t9ttPR9wP9KdalG2vYxFREpX6CFaBmUiyKh8eSF5Sbnak5j6KcdKlnH0SveVFbSkTKAuPyLJH9KXXxJOrCxZwhMcWed%2BR5E5Lk19W9Q1%2FnriyJmlpZwzVe33kmm%2F11nM8itzOL5%2BRKXAyUQOTa4jM3WK7DZwZ9oQLsL0Gpj0qNIjfC0FvW3BvLj4AzBtuAhAf11gcGyn2mnfVG6nUGexUVyDXZbQg147hKgdXtzEvaBwUiN93HmJS61FUJ7MYbdKD2MrCRRvMe1WdHTxkrfQM2eVsx9dTsm8OrWW74E48kx%2FbIUI4K2m4HA9XNkHiLuJgvga8RzHfMuOIFBet1aHu6hCodWu7EjBxqHDtgtX9o73PGbHd08%2FQVFr4iN9MsRUAzzG60UNNnYqMlwNbScNMiYV6pDKcQ3bSEX2DqBwR1%2FpISTm7JmfWSH7JrYWm6Fr7sZWuonJYn0RrKxQSywYBKs6qly4rgk4ZiezfrK6dbsy3hJslOMXirWDXbwsU6yg9zJx9k2xojg47jE9JrPn81b2EXot4uJo32uOXHOuOPo0PJnzTugtelh0Gr1uXzAKo4qfX7GMGdda61B3RFyDamVbPrb5meyD5hjr4TJ0IU4zLDRYbTWAu3mBbIvnuWBpi%2FiuRpHf8liLorrhOmk85vM6FTJ2CqHWpddCt5v68L5hlomLwzvuOI%2FOM2bUMtdjK1JEDa7%2F2kezWuF1hohOVM6twWHAsCH4uoBESm3pnEd4vPOwjH%2FgoWtcS%2Fxk0RGfQ6nmaAn5JHaamHo4%2FW4u0m%2FEE0iaB0g%2B8iZhCSnzlqfIKFSk8UnnByO5rz98VAM3KHiw0B5zpHP798of5sYX0mX67YPd%2FeyXUPJ34kp6krTlP5hUxqiwkNmFK1BIa7hbuEjwnCIQz%2F1XSyvKnEWkd5CUpcIszjSOH0xlqIjvf3K6n52TVSX3cd69fxsqP5qitLKk8cVb%2Bxc7n6lLfnEJedXiV07Ehfyd5axp%2F59hAF%2BHQflhGNTvwzCE%2F2YYPl6q19jDXxM4%2Bw0%3D%3C%2Fdiagram%3E%3Cdiagram%20id%3D%22hRxmh7t9jvji835mI4CV%22%20name%3D%22Page-2%22%3EjZJNb4MwDIZ%2FDcdJhEhrdx2F7rLLmFRtlyoCl0QKGIV0QH%2F9wnD4UFVpp9iPP2K%2FScDjqj8a0ch3LEAHUVj0AT8EUcQYe3HHSIaJ7DibQGlUQUkLyNQNCIZEr6qAdpNoEbVVzRbmWNeQ2w0TxmC3Tbug3t7aiBLuQJYLfU9PqrByovtot%2FA3UKX0N7NnWrgSPpk2aaUosFshngQ8Noh2sqo%2BBj2K53WZ6tIH0XkwA7X9T0H89X24xKn%2BSPAWnhWaU3p%2Boi4%2FQl9p4U9oLQ1sB6%2BC6%2BQEd85rJ5WFrBH5GOncmzsmbaWdx5xJ7cBY6B%2FOyebt3bcBrMCawaX4Ai8Y%2FRi2J79b6U9IrqT3TNCLl3PnRRRnkC7eXfT%2Fi61%2BMU9%2BAQ%3D%3D%3C%2Fdiagram%3E%3C%2Fmxfile%3E)
+## 📑 Table of Contents
+- [Description](#description)
+- [The setup includes](#the-setup-includes)
+- [How to develop](#how-to-develop)
+- [Run Locally (Fast Track)](#run-locally-fast-track)
+- [Project overview (Slow Track)](#project-overview-slow-track)
+- [1. Repository Files](#1-repository-files)
+- [2. Nginx Reverse Proxy](#2-nginx-reverse-proxy)
+- [3. MLflow on Google Cloud](#3-mlflow-on-google-cloud)
+- [4. Google Cloud Components](#4-google-cloud-components)
+    - [4.1 Cloud Run](#41-cloud-run)
+    - [4.2 Artifact Registry](#42-artifact-registry)
+    - [4.3 Cloud Storage (GCS)](#43-cloud-storage-gcs)
+    - [4.4 Cloud SQL (PostgreSQL)](#44-cloud-sql-postgresql)
+
+---
+
+## Description
+This repository contains a plain MLflow server packaged as a Docker image.  
+It can be deployed locally or on Google Cloud Run (recommended for a low-maintenance, low-cost setup).
+
+## The setup includes
+- MLflow tracking backend
+- Nginx reverse proxy for basic authentication
+- Support for Cloud SQL + Cloud Storage on GCP
+- GitHub Actions CI/CD pipeline for automatic deployments
+
+
+## How to develop
+There are no branches, or environments.  
+Each commit to remote on main will build and deploy a new latest server.  
+You should validate your changes with local docker before pushing anything.  
+In theory, this repo is only the `mlflow` server deployment tool,  
+and all of the existing data is still secured on `GCS` and `CloudSQL`,  
+no matter if the server itself works or not.
+
+
+## Run Locally (Fast Track)
+If you just want to spin up the MLflow server on your machine, you can build and run the container directly.
+Run:
+```
+bash run_local_docker.sh
+```
+This script:
+- Builds the Docker image with the `latest` tag
+- Stops and removes any previous MLflow container
+- Starts a new container mapped to `http://localhost:8080`
+- Loads configuration from your local `.env` file
+
+### Local `.env` Example
+Create a `.env` file in the repo root with:
+```
+BACKEND_STORE_URI=sqlite:///mlflow.db
+ARTIFACT_ROOT=./artifacts
+MLFLOW_TRACKING_PASSWORD=user
+MLFLOW_TRACKING_USERNAME=user
+MLFLOW_SERVER_ALLOWED_HOSTS=127.0.0.1,localhost
+```
+These settings emulate the Cloud Run environment but use local storage and SQLite.  
+The reverse proxy (Nginx) starts inside the container; once its logs show "running",   
+you can open the UI or run an example experiment using the `run_experiment.ipynb` notebook.
+
+
+## Project Overview (Slow Track)
+## 1. Repository Files
+| File                    | Purpose                                                                |
+| ----------------------- | ---------------------------------------------------------------------- |
+| `server.sh`             | Main entrypoint: starts Nginx + MLflow server                          |
+| `nginx.conf`            | Reverse proxy config: listens on a fixed port and forwards to MLflow   |
+| `Dockerfile`            | Builds the MLflow + Nginx image                                        |
+| `build_and_deploy.yaml` | GitHub Actions workflow that builds the image and deploys to Cloud Run |
+
+## 2. Nginx Reverse Proxy
+This setup uses Nginx as a lightweight reverse proxy that **enforces basic authentication**.  
+It sits *in front* of the MLflow server, so MLflow can’t be accessed without credentials.  
+Key points:
+- Credentials are generated at runtime from environment variables
+- They are written into `/etc/nginx/.htpasswd` inside the container
+- Only ports declared in `MLFLOW_SERVER_ALLOWED_HOSTS` can reach MLflow
+- Nginx protects all MLflow endpoints; nothing bypasses it
+- This keeps the container self-contained and easy to deploy.
+
+
+## 3. MLflow on Google Cloud
+When deployed on GCP, MLflow requires:
+- Cloud Storage (GCS) → to store artifacts (models, images, metrics, etc.)
+- Cloud SQL (PostgreSQL) → to store metadata and tracking tables
+- Cloud Run → to host the server in a secure and scalable environment.  
+
+All external backend/paths are controlled by environment variables passed to the container at runtime.
+
+
+# 4. Google Cloud Components
+## 4.1 Cloud Run
+Cloud Run hosts the MLflow server as a serverless container. Key things to understand:
+- Cloud Run only bills when requests are handled (very cost-efficient).
+- MLflow needs ~1.6 GB memory to run reliably, so don’t choose the smallest memory tier.
+- Deployment is handled through GitHub Actions, and each deployment automatically updates the container.
+- The service uses a **dedicated service account**, passed in at deploy time.  
+This account should **not** have broad permissions—only the minimum needed to access your GCS bucket and Cloud SQL instance.
+
+Authentication access:
+- MLflow behind Nginx uses username/password (from env vars).
+- Cloud Run itself must allow “unauthenticated” visitors unless you choose to enable IAM login as well.
+- You may switch Cloud Run to “Require Authentication” when not actively using the server to protect it.
+
+Important:
+Add the Cloud Run URL to `MLFLOW_SERVER_ALLOWED_HOSTS`.
+This must be done after the first deployment, because you don’t know the URL beforehand.
+
+
+## 4.2 Artifact Registry
+The GitHub Actions workflow pushes the latest Docker image to Artifact Registry.
+To save costs:
+- Enable automatic deletion of untagged images
+- Keep only the latest version
+
+The cost for a single latest image is usually around $0.01/month
+
+
+## 4.3 Cloud Storage (GCS)
+MLflow needs a bucket for storing:
+- model files
+- artifacts
+- metrics
+- anything not written to SQL
+
+You can:
+- Create a dedicated new bucket
+- Or use a folder inside an existing bucket
+
+If the bucket is in a US region, GCS has a free storage tier—so you mainly pay only for data transfer.
+
+
+## 4.4 Cloud SQL (PostgreSQL)
+Create a Cloud SQL instance with PostgreSQL. Tips:
+- You can use the smallest shared-core instance (“the potato CPU”), which is enough for MLflow.
+- You only pay for allocated storage (≈ $0.05/day for 10 GB) plus network egress.
+- You may turn the instance off when not using it, but note:
+    - Storage charges still apply
+    - Public IP reservation costs ~ $0.25/day (unless removed when turned off)
+
+### Public IP vs Private IP
+| Option         | Pros                                       | Cons                                               |
+| -------------- | ------------------------------------------ | -------------------------------------------------- |
+| **Public IP**  | No VPC connector needed, cheaper to run    | Slightly less secure; need to store DB credentials |
+| **Private IP** | Most secure; Cloud Run connects internally | Requires Serverless VPC Connector (~$12/month)     |
+
+### Important details:
+With public IP, Cloud Run’s service account needs Cloud SQL Client/Admin permissions.
+With private IP, Cloud Run must be configured with a VPC connector, and the SQL instance must be attached as a resource.
+You can toggle public IP on/off to save costs when the instance is idle.
+
+

@@ -3,7 +3,7 @@ name: Build and Deploy to Cloud Run
 on:
   push:
     branches:
-      - main-not
+      - main
 
 jobs:
   deploy:
@@ -56,6 +56,5 @@ jobs:
           --cpu 1 \
           --max-instances 1 \
           --allow-unauthenticated \
-          --add-cloudsql-instances "$DB_CONN_NAME" \
           --service-account ${{ secrets.GCP_MLFLOW_SA_NAME }} \
           --env-vars-file env-vars.yaml
