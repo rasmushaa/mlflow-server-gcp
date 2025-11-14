@@ -1,6 +1,6 @@
 # MLflow Tracking Server on Google Cloud
 
-[![Docs](https://img.shields.io/badge/Architecture-Drawio-red.svg)](https://raw.githubusercontent.com/rasmushaa/mlflow-server-gcp/refs/heads/main/doc/arc.drawio)
+[![Docs](https://img.shields.io/badge/Architecture-Drawio-red.svg)](https://viewer.diagrams.net/?url=https://raw.githubusercontent.com/rasmushaa/mlflow-server-gcp/refs/heads/main/doc/arc.drawio)
 
 ## 📑 Table of Contents
 - [Description](#description)
