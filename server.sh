@@ -17,6 +17,13 @@ fi
 printf "%s:%s\n" "$MLFLOW_TRACKING_USERNAME" "$(openssl passwd -apr1 "$MLFLOW_TRACKING_PASSWORD")" > /etc/nginx/.htpasswd
 
 
+# Limit DB connections (Mlflow + Alchemy wants to create multiple connections by default, and only 25 are supported on potate cloud sql)
+export MLFLOW_SQLALCHEMY_POOL_SIZE=2
+export MLFLOW_SQLALCHEMY_MAX_OVERFLOW=0
+export MLFLOW_SQLALCHEMY_POOL_TIMEOUT=5
+export MLFLOW_SQLALCHEMY_POOL_RECYCLE=180
+
+
 # Mlflow server
 echo "Starting MLflow server (host=127.0.0.1 port=5000)"
 mlflow server \
