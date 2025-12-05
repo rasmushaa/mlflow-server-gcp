@@ -18,10 +18,9 @@ printf "%s:%s\n" "$MLFLOW_TRACKING_USERNAME" "$(openssl passwd -apr1 "$MLFLOW_TR
 
 
 # Limit DB connections (Mlflow + Alchemy wants to create multiple connections by default, and only 25 are supported on potate cloud sql)
-export MLFLOW_SQLALCHEMY_POOL_SIZE=2
-export MLFLOW_SQLALCHEMY_MAX_OVERFLOW=0
-export MLFLOW_SQLALCHEMY_POOL_TIMEOUT=5
-export MLFLOW_SQLALCHEMY_POOL_RECYCLE=180
+export MLFLOW_SQLALCHEMYSTORE_POOL_SIZE=3
+export MLFLOW_SQLALCHEMYSTORE_MAX_OVERFLOW=5
+export MLFLOW_SQLALCHEMYSTORE_POOL_RECYCLE=180
 
 
 # Mlflow server
