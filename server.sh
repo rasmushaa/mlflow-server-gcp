@@ -13,7 +13,7 @@ export MLFLOW_SQLALCHEMYSTORE_POOL_RECYCLE=180
 
 # Mlflow server
 echo "Starting MLflow server (host=0.0.0.0 port=$PORT)"
-mlflow server \
+exec gunicorn mlflow.server:app \
     --host 0.0.0.0 \
     --port $PORT \
     --backend-store-uri "$BACKEND_STORE_URI" \
