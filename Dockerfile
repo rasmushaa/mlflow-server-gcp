@@ -2,6 +2,9 @@ FROM ghcr.io/mlflow/mlflow:v3.7.0
 
 EXPOSE 8080
 
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
 CMD mlflow server \
     --host 0.0.0.0 \
     --port 8080 \
