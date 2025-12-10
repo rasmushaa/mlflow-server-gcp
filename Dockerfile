@@ -2,9 +2,9 @@ FROM python:3.13-slim
 
 # Copy the repo
 WORKDIR /
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY mlflow.py mlflow.py
 COPY requirements.txt requirements.txt
-COPY server.sh /server.sh
+COPY server.sh server.sh
 
 # Install MLflow and Nginx
 RUN pip install --upgrade pip && pip install -r requirements.txt
