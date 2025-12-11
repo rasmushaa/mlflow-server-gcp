@@ -5,6 +5,10 @@ EXPOSE 8080
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
+ENV MLFLOW_SQLALCHEMYSTORE_POOL_SIZE=15
+ENV MLFLOW_SQLALCHEMYSTORE_MAX_OVERFLOW=5
+ENV MLFLOW_SQLALCHEMYSTORE_POOL_RECYCLE=180
+
 CMD mlflow server \
     --host 0.0.0.0 \
     --port 8080 \
