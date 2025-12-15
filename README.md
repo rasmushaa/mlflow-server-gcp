@@ -17,6 +17,8 @@
     - [4.3 Cloud Storage (GCS)](#43-cloud-storage-gcs)
     - [4.4 Cloud SQL (PostgreSQL)](#44-cloud-sql-postgresql)
 
+- [How to run Mlflow on GCP VM](#how-to-run-mlflow-on-gcp-vm)
+
 ---
 
 ## Description
@@ -157,3 +159,91 @@ With private IP, Cloud Run must be configured with a VPC connector, and the SQL 
 You can toggle public IP on/off to save costs when the instance is idle.
 
 
+
+# How to run Mlflow on GCP VM [Another apporach]
+## 1. Create a new VM insance, use `deep learning` for convience
+- Add a tag for firewall connections, like `mlflow`
+- Allow to use all GPC APIs
+- Select an existing SA with `Compute VM admin` rights
+## 2. Install `nginx`
+```
+sudo apt update
+sudo apt install nginx -y
+systemctl status nginx
+```
+Create a password file
+```
+sudo apt install apache2-utils -y
+sudo htpasswd -c /etc/nginx/.htpasswd <username>
+```
+Update the config file
+```
+sudo nano /etc/nginx/sites-available/mlflow
+# Copy paste the nginx.config
+```
+Enable config
+```
+sudo ln -s /etc/nginx/sites-available/mlflow /etc/nginx/sites-enabled/
+```
+Remove default config
+```
+sudo rm /etc/nginx/sites-enabled/default
+```
+Test and reaload
+```
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+## 3. Create a firewall rule
+From firewalls, create a new rule for 'mlflow' tag. 
+You should allow `0.0.0.0` for external access,  
+and ports for enginx at `80`
+
+## 4. Run mlflow server
+Remember to allow the local vm ip
+```
+mlflow server -h 127.0.0.1 -p 5000 --allowed-hosts <vm external ip> --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlruns
+```
+## 5. Access the server
+```
+http://<vm external ip>:80
+```
+
+# Auto startup
+Auto start mlflow using `systemd` service
+```
+sudo nano /etc/systemd/system/mlflow.service
+```
+```
+[Unit]
+Description=MLflow Tracking Server
+After=network.target
+
+[Service]
+# User who owns the venv and MLflow installation
+User=rasmus_haapaniemi
+
+# Your MLflow working directory (optional but recommended)
+WorkingDirectory=/home/rasmus_haapaniemi
+
+# Activate venv and run MLflow
+ExecStart=/bin/bash -c "source .venv/bin/activate && mlflow server --host 127.0.0.1 --port 5000 --backend-store-uri sqlite:///mlflow.db --default-artifact-root mlruns --allowed-hosts <vm external host>"
+
+# Restart on crash
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
+```
+Reload and enable on boot
+```
+sudo systemctl daemon-reload
+sudo systemctl enable mlflow
+sudo systemctl start mlflow
+```
+Enable also nginx
+```
+sudo systemctl enable nginx
+```

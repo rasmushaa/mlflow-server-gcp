@@ -1,16 +1,24 @@
+# Use the official MLflow image as base
 FROM ghcr.io/mlflow/mlflow:v3.7.0
 
+# Copy the repo
+WORKDIR /
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY requirements.txt requirements.txt
+COPY server.sh /server.sh
+
+# Fix for SQLAlchemy NullPool issue #19379
+ENV MLFLOW_SQLALCHEMYSTORE_POOLCLASS=NullPool
+
+# Install additional dependencies
+RUN pip install -r requirements.txt
+RUN apt-get update && apt-get install -y nginx apache2-utils openssl && rm -rf /var/lib/apt/lists/*
+
+# server.sh will create the htpasswd file dynamically at container start
+RUN chmod +x /server.sh
+
+# Expose port
 EXPOSE 8080
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
-ENV MLFLOW_SQLALCHEMYSTORE_POOL_SIZE=15
-ENV MLFLOW_SQLALCHEMYSTORE_MAX_OVERFLOW=5
-ENV MLFLOW_SQLALCHEMYSTORE_POOL_RECYCLE=180
-
-CMD mlflow server \
-    --host 0.0.0.0 \
-    --port 8080 \
-    --backend-store-uri $BACKEND_STORE_URI \
-    --default-artifact-root $ARTIFACT_ROOT
+# Run server
+CMD ["/server.sh"]
